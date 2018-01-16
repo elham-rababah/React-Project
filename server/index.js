@@ -1,3 +1,4 @@
+"use strict";
 const faces = require('cool-ascii-faces').faces;
 
 function getRandomString () {

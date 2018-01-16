@@ -1,3 +1,4 @@
+"use strict";
 function getUrlSearchParam(url, s) {
     const allQueries = url.slice(1).split('&');
     let val = '';
