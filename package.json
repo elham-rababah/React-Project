@@ -5,15 +5,21 @@
   "description": "Build a grid of product items and ads",
   "main": "server/index.js",
   "scripts": {
-    "startwebpack":"./node_modules/.bin/webpack -d",
+    "startwebpack": "./node_modules/.bin/webpack -d",
     "start": "json-server server/index.js --routes server/routes.json --middlewares server/handle-delay.js server/handle-ads.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "cool-ascii-faces": "^1.3.4",
     "json-server": "^0.9.6",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "webpack": "^3.10.0"
   }
 }
