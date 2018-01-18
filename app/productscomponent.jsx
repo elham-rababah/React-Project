@@ -1,12 +1,29 @@
 import React from 'react';
-import ReactTable from 'react-table'
+import ReactTable from 'react-table';
+import { Grid } from 'react-redux-grid';
 
 
 class Productscomponent extends React.Component {
 
   constructor(props) {
     super(props);
+
+
+    // Github fetch library : https://github.com/github/fetch
+    // Call the API page
+    fetch('http://localhost:3000/api/products')
+    .then((result) => {
+      console.log("result",result)
+      // Get the result
+      // If we want text, call result.text()
+      return result.json();
+    }).then((jsonResult) => {
+      // Do something with the result
+      this.data = jsonResult
+      console.log(jsonResult);
+    })
   }
+
 
  
 
@@ -47,17 +64,12 @@ render() {
     accessor: 'friend.age'
   }];
   return(
-  <ReactTable
-    data={data} columns={columns}/>);
-  }
-
-  /*render() {
-    return (
-      <div>
-        Test the Productscomponent
-      </div>
+    <div>
+    <ReactTable
+    data={data} columns={columns} defaultPageSize={10}/>
+    </div>
     );
-  }*/
+  }
 
 }
 
