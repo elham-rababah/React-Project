@@ -1,68 +1,50 @@
 import React from 'react';
 import ReactTable from 'react-table';
-import { Grid } from 'react-redux-grid';
+import axios from "axios";
 
 
 class Productscomponent extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      products: []
+    };
 
-
-    // Github fetch library : https://github.com/github/fetch
-    // Call the API page
-    fetch('http://localhost:3000/api/products')
-    .then((result) => {
-      console.log("result",result)
-      // Get the result
-      // If we want text, call result.text()
-      return result.json();
-    }).then((jsonResult) => {
-      // Do something with the result
-      this.data = jsonResult
-      console.log(jsonResult);
-    })
   }
 
+
+   componentDidMount() { 
+    axios.get("http://localhost:3000/api/products")
+    .then(result => {               
+            this.setState({
+                products:result.data
+            })
+        })
+   }
 
  
 
 render() {
-  
-  const data = [{
-    name: 'Tanner Linsley',
-    age: 26,
-    friend: {
-      name: 'Jason Maurer',
-      age: 23,
-    }
-  },
-  {
-    name: 'eee Linsley',
-    age: 86,
-    friend: {
-      name: 'rrr Maurer',
-      age: 93,
-    }
-  }
-
-  ]
+  const data = this.state.products;
 
   const columns = [{
-    Header: 'Name',
-    accessor: 'name' // String-based value accessors!
+    Header: 'ID',
+    accessor: 'id',
+  },{
+    Header: 'Face',
+    accessor: 'face' 
   }, {
-    Header: 'Age',
-    accessor: 'age',
-    Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
-  }, {
-    id: 'friendName', // Required because our accessor is not a string
-    Header: 'Friend Name',
-    accessor: d => d.friend.name // Custom value accessors!
-  }, {
-    Header: props => <span>Friend Age</span>, // Custom header components!
-    accessor: 'friend.age'
-  }];
+    Header: 'Price',
+    accessor: 'price',
+  },{
+    Header: 'Size',
+    accessor: 'size' 
+  },{
+    Header: 'Date',
+    accessor: 'date'
+  },];
+
   return(
     <div>
     <ReactTable
