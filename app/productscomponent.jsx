@@ -33,7 +33,8 @@ render() {
     accessor: 'id',
   },{
     Header: 'Face',
-    accessor: 'face' 
+    accessor: 'face',
+    sortable: false, 
   }, {
     Header: 'Price',
     accessor: 'price',
@@ -42,7 +43,8 @@ render() {
     accessor: 'size' 
   },{
     Header: 'Date',
-    accessor: 'date'
+    accessor: 'date',
+    sortable: false,
   },];
 
   return(
