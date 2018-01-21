@@ -8,25 +8,21 @@ class Productscomponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      data :[],
+      pages :-1,
+      loading: false,
+      pageSize:20,
+      page :0
+
+
     };
 
   }
 
 
-   componentDidMount() { 
-    axios.get("http://localhost:3000/api/products")
-    .then(result => {               
-            this.setState({
-                products:result.data
-            })
-        })
-   }
-
- 
-
 render() {
-  const data = this.state.products;
+  //const data = this.state.products;
 
   const columns = [{
     Header: 'ID',
@@ -50,8 +46,27 @@ render() {
   return(
     <div>
     <ReactTable
-    data={data} columns={columns} defaultPageSize={10}/>
-    </div>
+        columns={columns}
+        manual 
+        data={this.state.data} // should default to []
+        pages={this.state.pages} // should default to -1 (which means we don't know how many pages we have)
+        loading={this.state.loading}
+        onFetchData={(state, instance) => {
+        // show the loading overlay
+        this.setState({loading: true})
+        // fetch your data
+        axios.get("http://localhost:3000/api/products", {
+          page: state.page,
+          pageSize: state.pageSize,
+        }).then((res) => {
+            // Update react-table
+            console.log(res.data);
+            this.setState({
+              data: res.data,
+              pages: 10,
+              loading: false
+            })
+          })}}/></div>
     );
   }
 
